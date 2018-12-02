@@ -1,0 +1,54 @@
+Sub multiple_stock()
+
+  ' variable declare for stock name
+  Dim Ticker_Name As String
+
+  ' variable declare for the total volume of stock
+ Dim Volume_total As Double
+  Volume_total = 0
+Cells(1, 10).Value = "Ticker"
+Cells(1, 11).Value = "Total Volume"
+ 
+ 
+  Dim Summary_Table_Row As Integer
+  
+  Summary_Table_Row = 2
+
+  ' Loop through all stock
+  For i = 2 To 760912
+
+    ' Check if we are still within the same stock, if it is not...
+    If Cells(i + 1, 1).Value <> Cells(i, 1).Value Then
+
+      ' Set the stock name
+      Ticker_Name = Cells(i, 1).Value
+
+      ' Add  Total volume
+      Volume_total = Volume_total + Cells(i, 7).Value
+
+      ' Print the Stock name in the Summary Table
+      Range("J" & Summary_Table_Row).Value = Ticker_Name
+
+      ' Print Total volume to the Summary Table
+      Range("K" & Summary_Table_Row).Value = Volume_total
+
+      ' Add one to the summary table row
+      Summary_Table_Row = Summary_Table_Row + 1
+      
+      ' Reset the  Total volume
+      Volume_total = 0
+
+    ' If the cell immediately following a row with same stock
+    Else
+
+      ' Add brand total
+      Volume_total = Volume_total + Cells(i, 7).Value
+
+    End If
+
+  Next i
+
+End Sub
+
+
+
